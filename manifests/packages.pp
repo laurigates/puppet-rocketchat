@@ -1,7 +1,7 @@
 # Packages that are neccesary for Rocket.Chat installation and configuration
 class rocketchat::packages {
   class { 'nodejs':
-    repo_url_suffix           => '4.x',
+    repo_url_suffix           => '8.x',
     nodejs_dev_package_ensure => 'present',
     npm_package_ensure        => 'present',
     before                    => Exec['npm install'],
