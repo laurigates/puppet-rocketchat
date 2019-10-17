@@ -7,7 +7,5 @@ fixtures:
       repo: 'puppetlabs/apt'
     mongodb:
       repo: 'puppet/mongodb'
-    wget: 'maestrodev/wget'
     nodejs:
-      repo: 'willdurand/nodejs'
-      ref: '2.0.1'
+      repo: 'puppet/nodejs'
