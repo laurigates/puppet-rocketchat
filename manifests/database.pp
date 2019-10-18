@@ -8,6 +8,7 @@ class rocketchat::database (
   if ($manage_repos == true) {
     class { '::mongodb::globals':
       manage_package_repo => true,
+      version             => '3.6.12',
       before              => Class['::mongodb::server']
     }
   }
