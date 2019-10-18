@@ -21,13 +21,7 @@ describe 'rocketchat::packages' do
       end
 
       context 'it should contain all classes' do
-        it do
-          is_expected.to contain_class('nodejs').with(
-            'version'    => '8',
-            'build_deps' => 'true'
-          )
-        end
-
+        it { is_expected.to contain_class('nodejs') }
         it { is_expected.to contain_class('nodejs').that_comes_before("Exec[npm install]")}
         it { is_expected.to contain_package('curl') }
         it { is_expected.to contain_package('graphicsmagick') }
