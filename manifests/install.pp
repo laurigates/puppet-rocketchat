@@ -4,33 +4,26 @@ class rocketchat::install(
   $package_ensure,
   $package_source,
 ) {
-  include wget
+  include archive
 
   $file_path = "${download_path}/rocket.tgz"
 
   $source = $package_source ? {
-    undef   => "https://rocket.chat/releases/${package_ensure}/download",
+    undef   => "https://download.rocket.chat/${package_ensure}",
     default => "${package_source}/rocket.chat-${package_ensure}.tgz",
-  }
-
-  wget::fetch { 'Download stable Rocket.Chat package':
-    source      => $source,
-    destination => $file_path,
-    verbose     => false,
-    before      => Archive[$file_path],
-    unless      => "test -d ${destination}/bundle/server",
   }
 
   file { $destination:
     ensure => directory,
   }
 
-  archive { $file_path:
+  archive { 'Download stable Rocket.Chat package':
     path         => $file_path,
+    source       => $source,
     extract      => true,
     extract_path => $destination,
-    require      => File[$destination],
     creates      => "${destination}/bundle/server",
+    require      => File[$destination],
   }
 
   exec { 'npm install':
